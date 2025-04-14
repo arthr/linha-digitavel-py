@@ -19,27 +19,6 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# Verificar se o arquivo .env existe
-if not os.path.exists('.env'):
-    logger.warning("Arquivo .env não encontrado. Criando arquivo de exemplo...")
-    with open('.env', 'w') as f:
-        f.write("""# Configurações de conexão com o banco de dados
-DB_SERVER=seu_servidor.amazonaws.com
-DB_DATABASE=wba
-DB_USERNAME=seu_usuario
-DB_PASSWORD=sua_senha
-
-# Configurações fixas para a linha digitável
-BANCO=341
-MOEDA=9
-CARTEIRA=109
-AGENCIA=1704
-FIDC_CONTA=26957
-FIDC_DAC_CONTA=8
-SEC_CONTA=26957
-SEC_DAC_CONTA=8
-""")
-
 # Carregar variáveis de ambiente
 load_dotenv()
 
