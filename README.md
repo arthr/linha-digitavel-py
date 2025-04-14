@@ -62,12 +62,52 @@ SEC_CONTA=17063
 SEC_DAC_CONTA=6
 ```
 
-## Execução
+## Uso
 
-Execute o arquivo principal:
+### Execução em modo desenvolvimento:
 ```bash
 python main.py
 ```
+
+### Criação de executável:
+
+#### 1. Instale o PyInstaller:
+```
+# Se estiver usando ambiente virtual (recomendado)
+# Certifique-se de que o ambiente virtual esteja ativado
+venv\Scripts\activate  # No Windows
+source venv/bin/activate  # No Linux/Mac
+
+# Instale o PyInstaller no ambiente virtual
+pip install pyinstaller
+
+# Alternativa: instalação global (fora do ambiente virtual)
+# pip install pyinstaller --user
+```
+
+#### 2. Gere o executável:
+```
+# Opção básica (pasta com vários arquivos)
+pyinstaller --name="LinhaDigitavel-WBA" --windowed --icon=favicon.ico main.py
+
+# Arquivo único (mais lento para iniciar)
+pyinstaller --name="LinhaDigitavel-WBA" --onefile --windowed --icon=favicon.ico main.py
+
+# Para incluir as variáveis de ambiente no executável
+pyinstaller --name="LinhaDigitavel-WBA" --onefile --windowed --add-data=".env;." --icon=favicon.ico main.py
+```
+
+#### 3. O executável será gerado na pasta `dist/`:
+- Modo pasta: `dist/LinhaDigitavel-WBA/LinhaDigitavel-WBA.exe`
+- Modo arquivo único: `dist/LinhaDigitavel-WBA.exe`
+
+#### 4. Distribuição:
+- Ao distribuir o executável, certifique-se de que o computador de destino tenha o driver ODBC instalado
+- Para o modo pasta, distribua toda a pasta `LinhaDigitavel-WBA`
+- Para o modo arquivo único, basta distribuir o arquivo `.exe`
+- Se não incluiu o arquivo `.env` no executável, crie-o no mesmo diretório do executável
+
+> **Nota sobre segurança**: Incluir o arquivo `.env` no executável não é recomendado se ele contiver dados sensíveis como credenciais de banco de dados. Para ambientes de produção, considere distribuir o executável e o arquivo `.env` separadamente ou implementar um mecanismo mais seguro para armazenar credenciais.
 
 ## Uso
 
